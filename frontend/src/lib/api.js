@@ -2,11 +2,17 @@ import { axiosInstance } from "./axios";
 
 export const signup = async (signupData) => {
   const response = await axiosInstance.post("/auth/signup", signupData);
+   console.log('====================================');
+  console.log(response);
+  console.log('====================================');
   return response.data;
 };
 
 export const login = async (loginData) => {
   const response = await axiosInstance.post("/auth/login", loginData);
+  console.log('====================================');
+  console.log(response);
+  console.log('====================================');
   return response.data;
 };
 export const logout = async () => {
