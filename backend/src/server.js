@@ -15,22 +15,12 @@ const PORT = process.env.PORT;
 
 const __dirname = path.resolve();
 
-const allowedOrigins = [
-  process.env.CLIENT_URL,       // Local dev
-  process.env.PROD_CLIENT_URL,  // Deployed frontend
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.error("❌ Blocked by CORS:", origin);
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin:
+      process.env.NODE_ENV === "production"
+        ? process.env.PROD_CLIENT_URL
+        : process.env.CLIENT_URL,
     credentials: true,
   })
 );
